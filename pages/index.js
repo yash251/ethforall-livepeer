@@ -1,11 +1,21 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import {Button, Asset} from '../components';
 
 export default function Home() {
   const ref = useRef(null);
 
+  const [asset, setAsset] = useState(null);
+
   const chooseFile = () => { 
     ref.current.click();
+  };
+
+  const onChange = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setAsset(file);
   };
 
   return (
@@ -14,10 +24,10 @@ export default function Home() {
       <Button
         onClick={chooseFile}
       >
-        Click to upload
+        {asset ? "Upload a file" : "Choose a file"}
       </Button>
-      <input type={'file'} accept='video/*' className='hidden' ref={ref} /> 
-      <Asset />
+      <input type={'file'} accept='video/*' className='hidden' ref={ref} onChange={onChange} /> 
+      {asset && <Asset asset={asset} />}
     </div>
   )
 }
