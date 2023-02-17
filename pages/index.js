@@ -49,7 +49,7 @@ export default function Home() {
         {asset ? "Upload a file" : "Choose a file"}
       </Button>
       <input type={'file'} accept='video/*' className='hidden' ref={ref} onChange={onChange} /> 
-      {asset && <Asset asset={asset} />}
+      {asset && <Asset progress={progress} asset={asset} />}
     </div>
   )
 }
